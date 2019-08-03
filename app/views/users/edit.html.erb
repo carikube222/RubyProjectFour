@@ -1,0 +1,28 @@
+<style>
+h4, h3, p , button{font-family: 'Lato', sans-serif;}    
+</style>
+<br><br><br>
+
+<h3> Edit Your Info page</h3><br>
+<p><%= flash[:note] %></p>
+<div class ="form-group"><form action='/update/<%= @user.id %>' method='post'>
+    <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+    <p><label for="name">Name:</label>
+    <input id="name" type="text" name="name" value="<%= @user.name %>"></p>
+    <p><label for="email">Email:</label>
+    <input id="email" type="email" name="email" value="<%= @user.email %>"></p>
+    <p><label for="password">Password:</label>
+    <input id="password" type="password" name="password" value="<%= @user.password %>"></p>
+    <p><label for="password_confirmation">Retype Password:</label>
+    <input id="password_confirmation" type="password" name="password_confirmation" value="<%= @user.password %>"></p>
+    <button type="submit"> <i class="fa fa-rocket" aria-hidden="true"></i> Update</button>
+    </form>
+</div>
+<hr>
+<h4>
+<a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+&nbsp&nbsp<a href="/info/<%= @user.id %>"><i class="fa fa-tree" aria-hidden="true"></i> <%= @user.name.capitalize %></a>
+&nbsp&nbsp<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</h4>
+
+<!-- <p><label for="birthday">Birthday:<input type="date" data-date-format="YYYY/MM/DD" name="birthday"></p> -->

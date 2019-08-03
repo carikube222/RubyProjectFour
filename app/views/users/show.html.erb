@@ -1,0 +1,104 @@
+<style>
+h1 {font-size: 410%; font-weight: bold; font-family: 'Sumana', serif; font-style: italic; margin-left: 20px;}
+.smaller{font-size: 60%;}
+/*h3 {font-family: 'Schoolbell', cursive;}*/
+h2, h3, h4 {font-family: 'Coming Soon', cursive; font-weight: bold;}
+ul, p, td {font-family: 'Lato', sans-serif;}
+.col-md-3{background-color: #e3e3e3; border-radius: 12px 12px 12px 12px;}
+.row-title { margin-left:70px; text-align: center;}
+.row-height {
+    height: 440px;
+    padding-top: 20px;
+    padding-left: 105px;
+    padding-right: 240px;
+    margin-right: 5px;
+}
+.table td { text-align: center;}
+.table {margin-left: 10px;}
+.im-centered{margin-left:70px;}
+.im-centered-table{margin-left:70px;}
+.rowtable{margin-left:55px;}
+</style>
+<h1>“Vegetables are a must on a diet. I suggest carrot cake, zucchini bread and pumpkin pie."<span class='smaller'> - Jim Davis</span></h1>
+<br>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/info/<%= @user.id %>"><i class="fa fa-tree" aria-hidden="true"></i> <%= @user.name.capitalize %></a></li>
+    <li role="presentation" class="active"><a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+    <li role="presentation"><a href="/conditions/all"><i class="fa fa-book" aria-hidden="true"></i> Diet</a></li>
+    <li role="presentation"><a href="/pantrys/index"><i class="fa fa-cutlery" aria-hidden="true"></i> Pantry Favorites</a></li>
+    <li role="presentation"><a href="/wines/index"><i class="fa fa-glass" aria-hidden="true"></i> Wine List</a></li>
+    <li role="presentation"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</ul>
+<br>
+<div class="row-title">
+<div class="row">
+    <% @conditionfirst.each do |conditionf| %>
+    <h3>Diet: "<%= conditionf.object %>"</h3>
+</div>
+</div>
+
+<div class="im-centered">
+<div class="row">
+    <div class="col-md-3 row-height">
+        <h3>YEP.</h3>
+        <% Condition.find(conditionf.id).yes.each do |yes| %>
+            <h4><%= yes.content %></h4>
+        <% end %><br>
+        <div class ="input-append"><form class = "form-inline" action='/conditions/yes/<%= conditionf.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3 row-height">
+        <h3>MAYBE.</h3>
+        <% Condition.find(conditionf.id).maybes.each do |maybe| %>
+            <h4><%= maybe.content %></h4>
+        <% end %><br>
+
+        <div class ="form-group"><form action='/conditions/maybe/<%= conditionf.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3 row-height">
+        <h3>NOPE.</h3>
+        <% Condition.find(conditionf.id).nopes.each do |no| %>
+            <h4><%= no.content %></h4>
+        <% end %><br>
+        <div class ="form-group"><form action='/conditions/no/<%= conditionf.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    <% end %>
+</div>
+</div>
+<br><br>
+<div class="im-centered-table">
+<div class ="form-group"><form action='/conditions/create' method='post'>
+    <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+    <p><label for="object">Diet Plan: <input id="object" size="35" type="text" name="object">
+    &nbsp&nbsp<label for="startdate">Start Date: <input type="date" data-date-format="YYYY/MM/DD" name="startdate">
+    &nbsp&nbsp<label for="enddate">End Date: <input type="date" data-date-format="YYYY/MM/DD" name="enddate">
+    &nbsp&nbsp<button type="submit"><i class="fa fa-circle-o" aria-hidden="true"></i></button></p>
+    </form>
+</div>
+</div>
+<div class="rowtable">
+ <div class="row col-md-10">
+    <table class="table table-striped">
+        <% @conditions.each do |condition| %>
+        <tr>
+            <td><a href="/conditions/show/<%=condition.id %>"><%= condition.object %></a></td>
+            <td>Start: <%=condition.startdate %>&nbsp&nbsp End: <%=condition.enddate %></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+</div>

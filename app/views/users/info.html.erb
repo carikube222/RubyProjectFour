@@ -1,0 +1,13 @@
+<style>
+h4, p {font-family: 'Lato', sans-serif;}    
+</style>
+<br><br><br><br>
+<h3>Welcome, <%= @user.name %> </h3><br>
+<p>Your ID: <%= @user.id %></p>
+<p>Your Email: <%= @user.email %></p>
+<hr>
+<h4>
+<a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+&nbsp&nbsp<a href="/edit/<%= @user.id %>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+&nbsp&nbsp<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</h4>

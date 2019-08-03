@@ -1,0 +1,36 @@
+<style>
+h1 {font-size: 410%; font-weight: bold; font-family: 'Sumana', serif; font-style: italic; margin-left: 20px;}
+.smaller{font-size: 60%;}
+h3, ul, p , td{font-family: 'Lato', sans-serif;}
+.rowtable{margin-left:150px;}
+.table td, th { text-align: center;}
+.table {margin-left: 10px;}
+.row{text-align: center;}
+</style>
+<h1>"The food you eat can be either the safest &amp; most powerful form of medicine of the slowest form of poison."<span class='smaller'> - Ann Wigmore</span></h1>
+<br>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/info/<%= @user.id %>"><i class="fa fa-tree" aria-hidden="true"></i> <%= @user.name.capitalize %></a></li>
+    <li role="presentation"><a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+    <li role="presentation" class="active"><a href="/conditions/all"><i class="fa fa-book" aria-hidden="true"></i> Diet</a></li>
+    <li role="presentation"><a href="/pantrys/index"><i class="fa fa-cutlery" aria-hidden="true"></i> Pantry Favorites</a></li>
+    <li role="presentation"><a href="/wines/index"><i class="fa fa-glass" aria-hidden="true"></i> Wine List</a></li>
+    <li role="presentation"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</ul>
+<br><br>
+<div class="row">
+    <h3>&hearts;</h3>
+</div>
+<div class="rowtable">
+<div class="row col-md-10">
+    <table class="table table-striped">
+        </thead>
+        <% @conditions.each do |condition| %>
+        <tr>
+            <td><a href="/conditions/show/<%=condition.id %>"><%= condition.object %></a></td>
+			<td>Start: <%=condition.startdate %> &nbsp&nbsp End: <%=condition.enddate %></td>
+		</tr>
+        <% end %>
+    </table>
+</div>
+</div>

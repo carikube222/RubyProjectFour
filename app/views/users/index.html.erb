@@ -1,0 +1,36 @@
+<style>
+h1 {font-size: 850%; font-weight: bold; font-family: 'Sumana', serif; }
+.smaller{font-size: 50%;}
+p, h3 {font-family: 'Lato', sans-serif;}
+</style>
+<br><br><br>
+<h1>“People who love to eat are always the best people." <span class='smaller'>- Julia Child</span></h1>
+<br><br><hr><br>
+<div class="row">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-3">
+        <h3>Login</h3>
+        <p><%= flash[:message] %></p>
+        <div class ="form-group"><form action='/login' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="email" type="email" name="email" placeholder="Email"></p>
+            <p><input id="password" type="password" name="password" placeholder="Password"></p>
+            <button type="submit" class="btn btn-default"><i class="fa fa-cloud"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h3>Sign Up</h3>
+        <p><%= flash[:errors] %></p>
+        <div class ="form-group"><form action='/create' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="firstname" type="text" name="name" placeholder="Name"></p>
+            <p><input id="email" type="email" name="email" placeholder="Email"></p>
+            <p><input id="password" type="password" name="password" placeholder="Password"></p>
+            <p><input id="password_confirmation" type="password" name="password_confirmation" placeholder="Password Again"></p>
+            <button type="submit" class="btn btn-default"><i class="fa fa-cloud"></i></button>
+            </form>
+        </div>
+    </div>
+</div>

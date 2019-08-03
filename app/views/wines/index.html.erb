@@ -1,0 +1,42 @@
+<style>
+img {height: 274px; width: 274px;}
+.pictures {display: inline-block;}
+h1 {font-size: 450%; font-weight: bold; font-family: 'Sumana', serif; font-style: italic; margin-left: 20px}
+.smaller{font-size: 60%;}
+ul, h4, p, h5 {font-family: 'Lato', sans-serif;}
+.col-md-4{background-color: #e3e3e3; border-radius: 12px 12px 12px 12px;}
+.row { padding-left: 0px;}
+.row-height {
+    height: 400px;
+    padding-top: 20px;
+    padding-left: 100px;
+}
+</style>
+<h1>"Wine is the most healthful and most hygienic of beverages."<span class='smaller'> - Louis Pasteur</span></h1>
+<br>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/info/<%= @user.id %>"><i class="fa fa-tree" aria-hidden="true"></i> <%= @user.name.capitalize %></a></li>
+    <li role="presentation" ><a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+    <li role="presentation"><a href="/conditions/all"><i class="fa fa-book" aria-hidden="true"></i> Diet</a></li>
+    <li role="presentation"><a href="/pantrys/index"><i class="fa fa-cutlery" aria-hidden="true"></i> Pantry Favorites</a></li>
+    <li role="presentation" class="active"><a href="/wines/index"><i class="fa fa-glass" aria-hidden="true"></i> Wine List</a></li>
+    <li role="presentation"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</ul>
+<br>
+<div class="row">
+    <div class="col-md-10">
+        <%= form_tag wines_path, enctype: 'multipart/form-data' do %>
+            <h4>Add Picture:</h4> <p><%= file_field_tag :file  %></p>
+            <p><%= text_field_tag :title, placeholder=' Type', size:15  %> <%= text_field_tag :location, placeholder=' Location', size:15 %> <%= submit_tag ';D' %>
+        <% end %>
+    </div>
+</div>
+
+<% @uploads.reverse.each do |upload| %>
+    <div class="pictures">
+        <img src="<%= upload.url %>">
+        </br>
+        <h5><%= upload.title %>, <%= upload.location %></h5>
+        <br><br>
+    </div>
+<% end %>

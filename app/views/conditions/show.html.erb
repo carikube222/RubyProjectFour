@@ -1,0 +1,77 @@
+<style>
+h1 {font-size: 410%; font-weight: bold; font-family: 'Sumana', serif; font-style: italic; margin-left: 20px;}
+.smaller{font-size: 60%;}
+h2, h3, h4 {font-family: 'Coming Soon', cursive; font-weight: bold;}
+ul, p {font-family: 'Lato', sans-serif;}
+.col-md-3{background-color: #e3e3e3; border-radius: 12px 12px 12px 12px;}
+.row-title { margin-left:70px; text-align: center;}
+.row-height {
+    height: 440px;
+    padding-top: 20px;
+    padding-left: 105px;
+    padding-right: 240px;
+    margin-right: 5px;
+}
+.table td { text-align: center;}
+.table {margin-left: 10px;}
+.im-centered{margin-left:70px;}
+.im-centered-table{margin-left:70px;}
+.rowtable{margin-left:55px;}
+</style>
+<h1>"The food you eat can be either the safest &amp; most powerful form of medicine of the slowest form of poison."<span class='smaller'> - Ann Wigmore</span></h1>
+<br>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/info/<%= @user.id %>"><i class="fa fa-tree" aria-hidden="true"></i> <%= @user.name.capitalize %></a></li>
+    <li role="presentation"><a href="/show"><i class="fa fa-home" aria-hidden="true"></i> Main</a></li>
+    <li role="presentation"><a href="/conditions/all"><i class="fa fa-book" aria-hidden="true"></i> Diet</a></li>
+    <li role="presentation"><a href="/pantrys/index"><i class="fa fa-cutlery" aria-hidden="true"></i> Pantry Favorites</a></li>
+    <li role="presentation"><a href="/wines/index"><i class="fa fa-glass" aria-hidden="true"></i> Wine List</a></li>
+    <li role="presentation"><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Bye</a></li>
+</ul>
+<br><br>
+<div class="row-title">
+<div class="row">
+        <h3> <%= @condition.object %></h3>
+        <h4>start-date: <%= @condition.startdate %>  | end-date: <%= @condition.enddate %> </h4>
+</div>
+</div>
+<div class="im-centered">
+<div class="row">
+    <div class="col-md-3 row-height">
+        <h3>YEP.</h3>
+        <% Condition.find(@condition.id).yes.each do |yes| %>
+            <h4> <%= yes.content %></h4>
+        <% end %><br>
+        <div class ="form-group"><form action='/conditions/yes/yes/<%= @condition.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3 row-height">
+        <h3>MAYBE.</h3>
+        <% Condition.find(@condition.id).maybes.each do |maybe| %>
+            <h4><%= maybe.content %></h4>
+        <% end %><br>
+        <div class ="form-group"><form action='/conditions/maybe/maybe/<%= @condition.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3 row-height">
+        <h3>NOPE.</h3>
+        <% Condition.find(@condition.id).nopes.each do |no| %>
+            <h4><%= no.content %></h4>
+        <% end %><br>
+        <div class ="form-group"><form action='/conditions/no/no/<%= @condition.id %>' method='post'>
+            <input name="authenticity_token" value= "<%= form_authenticity_token %>" type="hidden">
+            <p><input id="add" type="text" size="11" name="add"></p>
+            <button type="submit"><i class="fa fa-rocket" aria-hidden="true"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
